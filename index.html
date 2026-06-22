@@ -431,15 +431,9 @@ input[readonly]{background:rgba(241,228,209,1);color:var(--accent);font-weight:7
     <div class="hcard hc-green"><div class="hcard-label">Total Repayment</div><div class="hcard-val" id="hlTotal">—</div></div>
   </div>
 
-  <!-- Boxed Total Interest for quick view -->
-  <div style="margin-top:12px;">
-    <div class="flabel">Total Interest (RM)</div>
-    <div class="dbox c-gold" id="totalInterestBox">—</div>
-  </div>
-
   <div class="hdiv"></div>
 
-  <div class="slabel s-green"><div class="slabel-dot"></div><span class="slabel-text">04 &nbsp; Monthly Installment</span><div class="slabel-line"></div></div>
+  <div class="slabel s-green"><span class="slabel-text">04 &nbsp; Monthly Installment</span><div class="slabel-line"></div></div>
   <div class="g2 mb">
     <div class="field">
       <div class="flabel">Monthly Installment (RM)</div>
@@ -654,7 +648,6 @@ function recalc(){
   g('ncdDisplay').textContent=fmt(ncdAmt);
   g('loanAmt').textContent=fmt(loan);
   g('intDisplay').textContent=fmt(totalInt);
-  if(g('totalInterestBox')) g('totalInterestBox').textContent = fmt(totalInt);
   g('monthlyPay').textContent=months>0?fmt((loan+totalInt)/months):'RM —';
   const pay5 = loan>0 ? fmt((loan + loan*(selectedRate/100)*5) / 60) : 'RM —';
   const pay7 = loan>0 ? fmt((loan + loan*(selectedRate/100)*7) / 84) : 'RM —';
@@ -676,7 +669,6 @@ function setTenure(yr){
 function clearOut(){
   g('otrPrice').value='';
   ['insDisplay','ncdDisplay','loanAmt','intDisplay','monthlyPay'].forEach(id=>g(id).textContent='—');
-  if(g('totalInterestBox')) g('totalInterestBox').textContent='—';
   // loan months removed
     ['pay5','pay7','pay9'].forEach(id=>g(id).textContent='RM —');
     g('hlBar').style.display='none';
