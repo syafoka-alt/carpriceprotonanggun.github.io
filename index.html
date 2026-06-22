@@ -12,31 +12,21 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#05091a;--panel:#080f22;--border:#1a2f5a;--border-hi:#2a5fc4;
-  --accent:#00c3ff;--accent2:#7b5cff;--gold:#ffd000;--gold2:#ffe966;
-  --green:#00e5a0;--red:#ff5577;--purple:#c084fc;--orange:#ff8c42;
-  --text:#ddeeff;--muted:#4a6a99;--input:#040b18;
+  --bg:#D0E6FD;--panel:#F1E4D1;--border:#c5d7ef;--border-hi:#b5cae6;
+  --accent:#162660;--accent2:#172e5e;--gold:#F1E4D1;--gold2:#e0d1c1;
+  --green:#0b7a63;--red:#b23a3a;--purple:#5b4b9a;--orange:#ff8c42;
+  --text:#162660;--muted:#37405a;--input:#F1E4D1;
 }
-body{background:var(--bg);color:var(--text);font-family:'Exo 2',sans-serif;min-height:100vh;overflow-x:hidden}
-body::before{
-  content:'';position:fixed;inset:0;z-index:0;
-  background:
-    radial-gradient(ellipse 80% 40% at 20% 0%,rgba(0,100,255,0.07) 0%,transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 100%,rgba(120,80,255,0.07) 0%,transparent 60%),
-    linear-gradient(rgba(0,195,255,0.025) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,195,255,0.025) 1px,transparent 1px);
-  background-size:auto,auto,44px 44px,44px 44px;pointer-events:none;
-}
-.page{position:relative;z-index:1;max-width:940px;margin:0 auto;padding:28px 16px 64px}
+body{background:var(--bg);color:var(--text);font-family:'Exo 2',sans-serif;font-weight:700;min-height:100vh;overflow-x:hidden}
+body::before{display:none}
+.page{position:relative;z-index:1;max-width:2200px;margin:0 auto;padding:18px 18px 26px}
 
 /* HEADER */
 .hdr{
   display:flex;align-items:center;justify-content:space-between;
-  padding:18px 26px;margin-bottom:24px;
-  background:linear-gradient(120deg,rgba(8,15,34,0.98),rgba(5,9,26,0.98));
-  border:1px solid var(--border-hi);border-radius:18px;
-  box-shadow:0 0 40px rgba(0,120,255,0.08),inset 0 1px 0 rgba(255,255,255,0.04);
-  position:relative;overflow:hidden;
+  padding:10px 12px;margin-bottom:12px;
+  background:rgba(22,38,96,0.12);border:1px solid var(--border);border-radius:12px;
+  box-shadow:none;position:relative;overflow:hidden;
 }
 .hdr::before{
   content:'';position:absolute;top:0;left:0;right:0;height:2px;
@@ -49,22 +39,22 @@ body::before{
 /* LOGO CIRCLE */
 .logo-wrap{
   width:62px;height:62px;border-radius:50%;
-  background:radial-gradient(circle,#1a1a1a,#000);
-  border:2px solid rgba(180,180,180,0.35);
-  box-shadow:0 0 0 1px rgba(255,255,255,0.08),0 0 24px rgba(0,195,255,0.18),0 0 48px rgba(0,195,255,0.07);
+  background:var(--accent);
+  border:2px solid rgba(255,255,255,0.18);
+  box-shadow:0 0 0 1px rgba(208,230,253,0.12),0 0 24px rgba(22,46,100,0.18),0 0 42px rgba(22,46,100,0.10);
   overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0;
   position:relative;
 }
 .logo-wrap::after{
   content:'';position:absolute;inset:0;border-radius:50%;
-  background:linear-gradient(135deg,rgba(255,255,255,0.06) 0%,transparent 60%);
+  background:linear-gradient(135deg,rgba(208,230,253,0.2) 0%,transparent 60%);
   pointer-events:none;
 }
 .logo-wrap img{width:100%;height:100%;object-fit:cover;display:block;border-radius:50%}
 
 .brand-name{
   font-family:'Orbitron',sans-serif;font-size:22px;font-weight:800;
-  background:linear-gradient(90deg,#fff 0%,var(--accent) 60%,var(--accent2) 100%);
+  background:linear-gradient(90deg,var(--accent) 0%,var(--accent2) 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px;
 }
 .brand-sub{font-size:9px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:3px}
@@ -78,22 +68,31 @@ body::before{
 .hdr-url{font-size:9px;color:var(--muted);letter-spacing:1px}
 
 /* HERO */
-.hero{text-align:center;margin-bottom:26px}
+.hero{text-align:center;margin-bottom:12px}
 .hero-title{
   font-family:'Orbitron',sans-serif;
-  font-size:clamp(18px,4.5vw,36px);font-weight:800;letter-spacing:4px;
-  background:linear-gradient(90deg,var(--accent) 0%,#fff 40%,var(--gold) 75%,var(--orange) 100%);
+  font-size:clamp(16px,3.5vw,28px);font-weight:700;letter-spacing:2px;color:var(--text);
+  margin-bottom:6px;line-height:1.05;
+  background:linear-gradient(90deg,var(--accent) 0%,var(--accent2) 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  margin-bottom:8px;line-height:1.15;
 }
-.hero-sub{font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+.hero-sub{font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
 
 /* PANEL */
 .panel{
-  background:linear-gradient(150deg,rgba(8,15,34,0.99),rgba(5,9,24,1));
-  border:1px solid var(--border);border-radius:20px;padding:28px;
-  margin-bottom:18px;position:relative;overflow:hidden;
-  box-shadow:0 4px 60px rgba(0,80,200,0.07);
+  background:var(--panel);border:5px solid var(--accent);border-radius:20px;padding:18px;
+  margin-bottom:12px;position:relative;overflow:hidden;
+}
+
+/* Horizontal layout for wider screens */
+@media(min-width:900px){
+  .panel-row{display:flex;gap:28px;align-items:flex-start;flex-wrap:nowrap}
+  .panel-left{flex:1;min-width:0;padding-right:18px}
+  .panel-right{flex:0 0 520px;min-width:460px;padding-left:30px;padding-right:18px;border-left:3px solid rgba(22,38,96,0.26)}
+  .panel-right .hl-bar{display:grid;grid-template-columns:repeat(3,minmax(120px,1fr));gap:16px;align-items:stretch}
+  .panel-right .tenure-grid{display:flex;flex-direction:column;gap:16px}
+  .tenure-grid .tcard{width:100%}
+  .summary .sum-grid{display:block}
 }
 .panel::after{
   content:'';position:absolute;top:0;left:0;right:0;height:1px;
@@ -157,29 +156,33 @@ body::before{
 
 /* FIELDS */
 .field{display:flex;flex-direction:column;gap:6px}
-.flabel{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:600}
+.flabel{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:700}
 input,select{
-  background:var(--input);border:1px solid var(--border);border-radius:10px;
-  color:var(--text);font-family:'Exo 2',sans-serif;font-size:13px;font-weight:500;
-  padding:9px 12px;outline:none;width:100%;appearance:none;
+  background:rgba(241,228,209,0.94);border:1px solid var(--border);border-radius:10px;
+  color:var(--text);font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;
+  padding:10px 12px;outline:none;width:100%;appearance:none;
   transition:border-color .2s,box-shadow .2s,background .2s;
 }
-input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,195,255,0.1);background:#040e1e}
-input[readonly]{color:var(--gold2);font-weight:700;cursor:default;border-color:rgba(255,208,0,0.2)}
+select{
+  background:#ffffff;color:var(--accent);border-color:var(--border);font-weight:600;
+}
+select option{background:#ffffff;color:var(--accent)}
+input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,195,255,0.1);background:#ffffff}
+input[readonly]{background:rgba(241,228,209,1);color:var(--accent);font-weight:700;cursor:default;border-color:var(--accent);box-shadow:inset 0 0 0 1px rgba(22,38,96,0.12)}
 .swrap{position:relative}
 .swrap::after{content:'▾';position:absolute;right:13px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
 
 .rate-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .rate-btn{width:100%;border:1px solid var(--border);border-radius:12px;background:var(--input);color:var(--text);font-family:'Exo 2',sans-serif;font-size:14px;font-weight:700;padding:12px 0;cursor:pointer;transition:all .2s}
 .rate-btn:hover{border-color:var(--accent);box-shadow:0 0 12px rgba(0,195,255,0.12)}
-.rate-btn.sel{background:linear-gradient(90deg,var(--accent),var(--accent2));border-color:var(--accent);color:#fff;box-shadow:0 8px 24px rgba(0,195,255,0.18)}
+.rate-btn.sel{background:linear-gradient(90deg,var(--accent),var(--accent2));border-color:var(--accent);color:var(--panel);box-shadow:0 8px 24px rgba(0,195,255,0.18)}
 
 /* DBOX */
-.dbox{background:var(--input);border:1px solid var(--border);border-radius:10px;padding:11px 14px;font-size:14px;font-weight:700;min-height:44px;display:flex;align-items:center}
-.dbox.c-green{color:var(--green);border-color:rgba(0,229,160,0.2)}
-.dbox.c-blue{color:var(--accent);border-color:rgba(0,195,255,0.2)}
-.dbox.c-purple{color:var(--purple);border-color:rgba(192,132,252,0.2)}
-.dbox.c-gold{color:var(--gold2);border-color:rgba(255,208,0,0.2)}
+.dbox{background:rgba(241,228,209,0.92);border:1px solid var(--border);border-radius:10px;padding:11px 14px;font-size:14px;font-weight:700;min-height:44px;display:flex;align-items:center}
+.dbox.c-green{color:var(--green);border-color:rgba(11,122,99,0.18)}
+.dbox.c-blue{color:var(--accent);border-color:rgba(22,38,96,0.28)}
+.dbox.c-purple{color:var(--purple);border-color:rgba(91,75,154,0.2)}
+.dbox.c-gold{color:var(--accent2);border-color:rgba(241,228,209,0.6)}
 
 /* BADGE */
 .type-badge{display:inline-flex;align-items:center;gap:6px;font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:4px 10px;border-radius:6px;margin-bottom:12px}
@@ -193,7 +196,7 @@ input[readonly]{color:var(--gold2);font-weight:700;cursor:default;border-color:r
 .tgl input{opacity:0;width:0;height:0;position:absolute}
 .tgl-track{position:absolute;inset:0;border-radius:12px;background:#0a1830;border:1px solid var(--border);transition:all .3s}
 .tgl input:checked~.tgl-track{background:linear-gradient(90deg,var(--accent2),var(--accent));border-color:var(--accent);box-shadow:0 0 12px rgba(0,195,255,0.3)}
-.tgl-thumb{position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .3s;box-shadow:0 1px 4px rgba(0,0,0,.5)}
+.tgl-thumb{position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:var(--panel);transition:transform .3s;box-shadow:0 1px 4px rgba(0,0,0,.5)}
 .tgl input:checked~.tgl-track~.tgl-thumb{transform:translateX(22px)}
 .grant-status{font-size:11px;font-weight:700;letter-spacing:1px;transition:color .3s}
 .gs-on{color:var(--green)}.gs-off{color:var(--muted)}
@@ -203,9 +206,9 @@ input[readonly]{color:var(--gold2);font-weight:700;cursor:default;border-color:r
 
 /* TENURE CARDS */
 .tenure-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:4px}
-.tcard{border-radius:16px;padding:20px 12px;text-align:center;cursor:pointer;background:linear-gradient(160deg,#0a1530,#060f22);border:1px solid var(--border);transition:all .25s;position:relative;overflow:hidden}
+.tcard{border-radius:16px;padding:18px 12px;text-align:center;cursor:pointer;background:linear-gradient(160deg,rgba(22,38,96,0.18),rgba(208,230,253,0.6));border:1px solid var(--border);transition:all .25s;position:relative;overflow:hidden}
 .tcard::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border-hi),transparent)}
-.tcard:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,120,255,0.15)}
+.tcard:hover{border-color:var(--accent2);transform:translateY(-3px);box-shadow:0 12px 30px rgba(22,38,96,0.12)}
 .tcard.sel{background:linear-gradient(160deg,#1a0f30,#0e0820);border-color:var(--accent2)}
 .tcard.sel::before{background:linear-gradient(90deg,transparent,var(--accent2),var(--accent),transparent)}
 @keyframes cardPulse{0%,100%{box-shadow:0 0 20px rgba(123,92,255,0.2)}50%{box-shadow:0 0 35px rgba(123,92,255,0.4)}}
@@ -224,13 +227,23 @@ input[readonly]{color:var(--gold2);font-weight:700;cursor:default;border-color:r
 .hcard{flex:1;border-radius:12px;padding:14px 16px;background:var(--input);border:1px solid var(--border);text-align:center}
 .hcard-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
 .hcard-val{font-family:'Orbitron',sans-serif;font-size:clamp(11px,2.2vw,19px);font-weight:800}
-.hc-blue{border-color:rgba(0,195,255,0.25);background:linear-gradient(135deg,rgba(0,195,255,0.05),var(--input))}
+.hc-blue{border-color:rgba(22,38,96,0.12);background:linear-gradient(135deg,rgba(22,38,96,0.06),var(--input))}
 .hc-blue .hcard-val{color:var(--accent)}
-.hc-gold{border-color:rgba(255,208,0,0.25);background:linear-gradient(135deg,rgba(255,208,0,0.05),var(--input))}
-.hc-gold .hcard-val{color:var(--gold2)}
-.hc-green{border-color:rgba(0,229,160,0.25);background:linear-gradient(135deg,rgba(0,229,160,0.05),var(--input))}
+.hc-gold{border-color:rgba(241,228,209,0.6);background:linear-gradient(135deg,rgba(241,228,209,0.5),var(--input))}
+.hc-gold .hcard-val{color:var(--text)}
+.hc-green{border-color:rgba(13,122,99,0.12);background:linear-gradient(135deg,rgba(13,122,99,0.04),var(--input))}
 .hc-green .hcard-val{color:var(--green)}
 @media(max-width:440px){.hl-bar{flex-direction:column}}
+
+/* Ensure boxed Total Interest in highlight bar matches the Total Repayment numeric style */
+.hcard .dbox.c-gold{
+  font-family:'Orbitron',sans-serif;
+  font-size:clamp(11px,2.2vw,19px);
+  font-weight:800;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
 /* SUMMARY */
 .summary{margin-top:18px;border-radius:16px;padding:20px;background:linear-gradient(135deg,rgba(0,195,255,0.03),rgba(123,92,255,0.03));border:1px solid var(--border);display:none}
@@ -289,6 +302,8 @@ input[readonly]{color:var(--gold2);font-weight:700;cursor:default;border-color:r
 
 <!-- MAIN PANEL -->
 <div class="panel">
+  <div class="panel-row">
+    <div class="panel-left">
 
   <div class="slabel s-blue"><div class="slabel-dot"></div><span class="slabel-text">01 &nbsp; Vehicle Selection</span><div class="slabel-line"></div></div>
   <div class="g2 mb">
@@ -368,10 +383,6 @@ input[readonly]{color:var(--gold2);font-weight:700;cursor:default;border-color:r
       <input type="number" id="inYears" value="5" min="1" max="9" oninput="recalc()"/>
     </div>
     <div class="field">
-      <div class="flabel">Loan Tenure (Months)</div>
-      <input type="text" id="inMonths" readonly value="60"/>
-    </div>
-    <div class="field">
       <div class="flabel">NCD Old Car (%)</div>
       <div class="swrap">
         <select id="selNCD" onchange="recalc()">
@@ -391,17 +402,13 @@ input[readonly]{color:var(--gold2);font-weight:700;cursor:default;border-color:r
   </div>
 
   <div class="g2 mb">
-    <div class="field">
-      <div class="flabel">Down Payment (%)</div>
-      <input type="number" id="inDownPct" value="0" min="0" max="100" oninput="onDownPct()"/>
-    </div>
-    <div class="field">
-      <div class="flabel">Down Payment (RM)</div>
-      <input type="number" id="inDownAmt" value="0.00" min="0" step="0.01" oninput="onDownAmt()"/>
+    <div class="field span2">
+      <div class="flabel">Down Payment (enter percent or RM)</div>
+      <input type="text" id="inDown" placeholder="e.g. 10% or 3000" oninput="onDownInput()" />
     </div>
   </div>
   <div class="field span2" style="margin:10px 0 16px;">
-    <div class="flabel" style="color:var(--muted);font-size:11px;line-height:1.5;">Use only one down payment method: % or RM. The other field will clear automatically.</div>
+    <div class="flabel" style="color:var(--muted);font-size:11px;line-height:1.5;">Type a percentage (e.g. 10%) or a numeric RM amount (e.g. 3000).</div>
   </div>
 
   <div class="g2 mb">
@@ -415,11 +422,19 @@ input[readonly]{color:var(--gold2);font-weight:700;cursor:default;border-color:r
     </div>
   </div>
 
+    </div>
+    <div class="panel-right">
   <!-- HIGHLIGHT BAR -->
   <div class="hl-bar" id="hlBar" style="display:none">
     <div class="hcard hc-blue"><div class="hcard-label">Loan Amount</div><div class="hcard-val" id="hlLoan">—</div></div>
-    <div class="hcard hc-gold"><div class="hcard-label">Total Interest</div><div class="hcard-val" id="hlInt">—</div></div>
+    <div class="hcard hc-gold"><div class="hcard-label">Total Interest</div><div class="dbox c-gold" id="hlInt">—</div></div>
     <div class="hcard hc-green"><div class="hcard-label">Total Repayment</div><div class="hcard-val" id="hlTotal">—</div></div>
+  </div>
+
+  <!-- Boxed Total Interest for quick view -->
+  <div style="margin-top:12px;">
+    <div class="flabel">Total Interest (RM)</div>
+    <div class="dbox c-gold" id="totalInterestBox">—</div>
   </div>
 
   <div class="hdiv"></div>
@@ -430,10 +445,7 @@ input[readonly]{color:var(--gold2);font-weight:700;cursor:default;border-color:r
       <div class="flabel">Monthly Installment (RM)</div>
       <div class="dbox c-green" id="monthlyPay">—</div>
     </div>
-    <div class="field">
-      <div class="flabel">Loan Months</div>
-      <div class="dbox c-blue" id="loanMonths">—</div>
-    </div>
+    <!-- Loan months removed per request -->
   </div>
 
   <div class="tenure-grid mb">
@@ -455,25 +467,11 @@ input[readonly]{color:var(--gold2);font-weight:700;cursor:default;border-color:r
   </div>
 
   <!-- SUMMARY -->
-  <div class="summary" id="summary">
-    <div class="sum-hdr">Loan Amount · Total Interest · Total Repayment</div>
-    <div class="sum-grid" style="display:flex;gap:12px;">
-      <div class="hcard hc-blue" style="flex:1;padding:12px;">
-        <div class="hcard-label">Loan Amount</div>
-        <div class="hcard-val" id="sLoanAmt">—</div>
-      </div>
-      <div class="hcard hc-gold" style="flex:1;padding:12px;">
-        <div class="hcard-label">Total Interest</div>
-        <div class="hcard-val" id="sTotalInt">—</div>
-      </div>
-      <div class="hcard hc-green" style="flex:1;padding:12px;">
-        <div class="hcard-label">Total Repayment</div>
-        <div class="hcard-val" id="sTotalRep">—</div>
-      </div>
-    </div>
-  </div>
+  <!-- summary removed to avoid redundancy; monthly installment cards below are primary results -->
 
   <button class="btn-reset" onclick="resetAll()">↺ &nbsp;&nbsp; Reset Calculator</button>
+    </div>
+  </div>
 </div>
 
 <!-- FOOTER -->
@@ -507,7 +505,7 @@ input[readonly]{color:var(--gold2);font-weight:700;cursor:default;border-color:r
         img.style.display='none';
         const span=document.createElement('span');
         span.textContent='P';
-        span.style.cssText='font-family:Orbitron,sans-serif;font-size:22px;font-weight:800;color:#c8c8c8;text-shadow:0 0 10px rgba(255,255,255,0.3)';
+        span.style.cssText='font-family:Orbitron,sans-serif;font-size:22px;font-weight:800;color:#fff;text-shadow:0 0 10px rgba(0,0,0,0.25)';
         img.parentElement.appendChild(span);
       });
       return;
@@ -613,17 +611,23 @@ function setRate(rate){
   recalc();
 }
 
-function onDownPct(){
-  const pct=Math.max(0, Math.min(100, parseFloat(g('inDownPct').value) || 0));
-  g('inDownPct').value=pct;
-  g('inDownAmt').value='';
-  recalc();
-}
-
-function onDownAmt(){
-  const amt=Math.max(0, parseFloat(g('inDownAmt').value) || 0);
-  g('inDownAmt').value=amt.toFixed(2);
-  g('inDownPct').value='';
+function onDownInput(){
+  const el = g('inDown');
+  if(!el) return;
+  let v = (el.value || '').toString().trim();
+  if(v === ''){ el.value = ''; recalc(); return; }
+  // If user typed a percent (e.g. "10%"), normalise and keep percent format
+  const pctMatch = v.match(/^([0-9]+(?:\.[0-9]+)?)\s*%$/);
+  if(pctMatch){
+    let pct = parseFloat(pctMatch[1]) || 0;
+    pct = Math.max(0, Math.min(100, pct));
+    el.value = pct + '%';
+  } else {
+    // Otherwise treat as numeric RM amount, strip non-numeric characters and format to integer
+    const num = parseFloat(v.replace(/[^0-9.-]/g,'')) || 0;
+    const intval = Math.max(0, Math.round(num));
+    el.value = intval > 0 ? String(intval) : '';
+  }
   recalc();
 }
 
@@ -631,13 +635,18 @@ function recalc(){
   if(!carPrice){clearOut();return;}
   const rebate=parseFloat(g('inRebate').value)||0;
   const ncdPct=parseFloat(g('selNCD').value)||0;
-  const downPct=parseFloat(g('inDownPct').value)||0;
-  const downAmtInput=parseFloat(g('inDownAmt').value)||0;
+  const downInputStr = (g('inDown') && g('inDown').value) ? g('inDown').value.toString().trim() : '';
   const years=parseFloat(g('inYears').value)||0;
   const months=Math.max(0, Math.round(years*12));
-  g('inMonths').value=months>0?months:'';
   const ncdAmt=insAmt*(ncdPct/100);
-  const down = downPct>0 ? (carPrice * downPct / 100) : downAmtInput;
+  let down = 0;
+  if(downInputStr.endsWith('%')){
+    const pct = parseFloat(downInputStr.replace('%',''))||0;
+    down = carPrice * Math.max(0, Math.min(100, pct)) / 100;
+  } else {
+    const num = parseFloat(downInputStr.replace(/[^0-9.-]/g,''))||0;
+    down = Math.max(0, Math.round(num));
+  }
   const grantOn=g('chkGrant').checked;
   const gAmt=grantOn?GRANT:0;
   const loan=Math.max(0, carPrice - rebate - down - ncdAmt - gAmt);
@@ -645,8 +654,8 @@ function recalc(){
   g('ncdDisplay').textContent=fmt(ncdAmt);
   g('loanAmt').textContent=fmt(loan);
   g('intDisplay').textContent=fmt(totalInt);
+  if(g('totalInterestBox')) g('totalInterestBox').textContent = fmt(totalInt);
   g('monthlyPay').textContent=months>0?fmt((loan+totalInt)/months):'RM —';
-  g('loanMonths').textContent=months>0?months:'—';
   const pay5 = loan>0 ? fmt((loan + loan*(selectedRate/100)*5) / 60) : 'RM —';
   const pay7 = loan>0 ? fmt((loan + loan*(selectedRate/100)*7) / 84) : 'RM —';
   const pay9 = loan>0 ? fmt((loan + loan*(selectedRate/100)*9) / 108) : 'RM —';
@@ -657,10 +666,6 @@ function recalc(){
   g('hlInt').textContent=fmt(totalInt);
   g('hlTotal').textContent=fmt(loan+totalInt);
   g('hlBar').style.display='flex';
-  g('sLoanAmt').textContent = fmt(loan);
-  g('sTotalInt').textContent = fmt(totalInt);
-  g('sTotalRep').textContent = fmt(loan+totalInt);
-  g('summary').classList.add('show');
 }
 
 function setTenure(yr){
@@ -671,11 +676,10 @@ function setTenure(yr){
 function clearOut(){
   g('otrPrice').value='';
   ['insDisplay','ncdDisplay','loanAmt','intDisplay','monthlyPay'].forEach(id=>g(id).textContent='—');
-  g('loanMonths').textContent='—';
-  g('inMonths').value='';
+  if(g('totalInterestBox')) g('totalInterestBox').textContent='—';
+  // loan months removed
     ['pay5','pay7','pay9'].forEach(id=>g(id).textContent='RM —');
-    ['sLoanAmt','sTotalInt','sTotalRep'].forEach(id=>g(id).textContent='—');
-    g('summary').classList.remove('show');
+    g('hlBar').style.display='none';
     g('hlBar').style.display='none';
 }
 
@@ -685,10 +689,8 @@ function resetAll(){
   g('varRow').style.display='none';
   g('typeBadge').innerHTML='';
   g('inRebate').value=4000;
-  g('inDownPct').value=0;
-  g('inDownAmt').value=0;
+  if(g('inDown')) g('inDown').value='';
   g('inYears').value=5;
-  g('inMonths').value=60;
   g('selNCD').value=0;
   selectedRate=DEFAULT_RATE;
   g('rate23').classList.add('sel');
