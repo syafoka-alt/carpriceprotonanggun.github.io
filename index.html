@@ -134,41 +134,21 @@ body::before{
   .dbox{min-height:40px;}
   .hcard{padding:12px 14px;}
 }
-@media(max-width:1160px){
-  .page{padding:16px 10px 28px;}
-  .hdr{padding:14px 16px;margin-bottom:18px;}
-  .hero-title{font-size:clamp(18px,4vw,30px);}
+@media(max-width:900px){
+  .page{padding:18px 10px 32px;}
+  .hdr{padding:14px 14px;}
+  .hero-title{font-size:clamp(18px,4.5vw,32px);}
   .hero-sub{font-size:10px;}
   .panel{padding:20px;}
-  .slabel{gap:8px;margin-bottom:14px;}
-  .flabel{font-size:10px;}
-  input,select{font-size:13px;padding:9px 11px;}
-  .dbox{font-size:13px;min-height:40px;padding:10px 12px;}
-  .rate-btn{font-size:13px;padding:10px 0;}
-  .grant-row{padding:10px 12px;}
-  .tcard{padding:16px 10px;}
-  .hcard{padding:12px 12px;}
-  .sum-grid{gap:8px 16px;}
-  .btn-reset{padding:12px;font-size:10px;}
-  .footer{font-size:9px;}
-  .footer-top{gap:8px;}
-  .foot-brand{font-size:12px;}
-}
-@media(max-width:900px){
-  .page{padding:16px 10px 26px;}
-  .hdr{padding:14px 14px;}
-  .hero-title{font-size:clamp(18px,4.5vw,30px);}
-  .hero-sub{font-size:10px;}
-  .panel{padding:18px;}
   .hdr{flex-direction:column;align-items:flex-start;gap:12px;}
   .hdr-right{align-items:flex-start;}
   .hl-bar{flex-direction:column;}
 }
 @media(max-width:820px){
-  .page{padding:14px 8px 24px;}
+  .page{padding:16px 10px 28px;}
   .hero-title{font-size:clamp(18px,5vw,28px);}
   .hero-sub{font-size:10px;}
-  .panel{padding:16px;}
+  .panel{padding:18px;}
   .hdr{gap:12px;}
   .hl-bar{gap:10px;}
 }
@@ -476,22 +456,19 @@ input[readonly]{color:var(--gold2);font-weight:700;cursor:default;border-color:r
 
   <!-- SUMMARY -->
   <div class="summary" id="summary">
-    <div class="sum-hdr">📋 &nbsp; Full Loan Summary</div>
-    <div class="sum-grid">
-      <div>
-        <div class="srow"><span class="sk">Car Model</span><span class="sv blue" id="sModel">—</span></div>
-        <div class="srow"><span class="sk">OTR Price</span><span class="sv" id="sPrice">—</span></div>
-        <div class="srow"><span class="sk">Down Payment</span><span class="sv orange" id="sDown">—</span></div>
-        <div class="srow"><span class="sk">Loan Amount</span><span class="sv blue" id="sLoan">—</span></div>
-        <div class="srow"><span class="sk">Loan Tenure</span><span class="sv" id="sTenure">—</span></div>
-        <div class="srow"><span class="sk">Interest Rate</span><span class="sv" id="sRate">2.3% flat</span></div>
+    <div class="sum-hdr">Loan Amount · Total Interest · Total Repayment</div>
+    <div class="sum-grid" style="display:flex;gap:12px;">
+      <div class="hcard hc-blue" style="flex:1;padding:12px;">
+        <div class="hcard-label">Loan Amount</div>
+        <div class="hcard-val" id="sLoanAmt">—</div>
       </div>
-      <div>
-        <div class="srow"><span class="sk">Est. Insurance</span><span class="sv purple" id="sIns">—</span></div>
-        <div class="srow"><span class="sk">NCD Discount</span><span class="sv green" id="sNCD">—</span></div>
-        <div class="srow"><span class="sk">Rebate</span><span class="sv gold" id="sRebate">—</span></div>
-        <div class="srow"><span class="sk">EV Grant</span><span class="sv gold" id="sGrant">—</span></div>
-        <div class="srow"><span class="sk">Total Interest</span><span class="sv red" id="sInt">—</span></div>
+      <div class="hcard hc-gold" style="flex:1;padding:12px;">
+        <div class="hcard-label">Total Interest</div>
+        <div class="hcard-val" id="sTotalInt">—</div>
+      </div>
+      <div class="hcard hc-green" style="flex:1;padding:12px;">
+        <div class="hcard-label">Total Repayment</div>
+        <div class="hcard-val" id="sTotalRep">—</div>
       </div>
     </div>
   </div>
@@ -680,17 +657,9 @@ function recalc(){
   g('hlInt').textContent=fmt(totalInt);
   g('hlTotal').textContent=fmt(loan+totalInt);
   g('hlBar').style.display='flex';
-  g('sModel').textContent=varLabel;
-  g('sPrice').textContent=fmt(carPrice);
-  g('sDown').textContent=fmt(down);
-  g('sLoan').textContent=fmt(loan);
-  g('sTenure').textContent=years>0?years+' yr':'—';
-  g('sRate').textContent=selectedRate.toFixed(1)+'% flat';
-  g('sIns').textContent=fmt(insAmt);
-  g('sNCD').textContent='− '+fmt(ncdAmt);
-  g('sRebate').textContent=fmt(rebate);
-  g('sGrant').textContent=gAmt?fmt(gAmt):'N/A';
-  g('sInt').textContent=fmt(totalInt);
+  g('sLoanAmt').textContent = fmt(loan);
+  g('sTotalInt').textContent = fmt(totalInt);
+  g('sTotalRep').textContent = fmt(loan+totalInt);
   g('summary').classList.add('show');
 }
 
@@ -704,9 +673,10 @@ function clearOut(){
   ['insDisplay','ncdDisplay','loanAmt','intDisplay','monthlyPay'].forEach(id=>g(id).textContent='—');
   g('loanMonths').textContent='—';
   g('inMonths').value='';
-  ['pay5','pay7','pay9'].forEach(id=>g(id).textContent='RM —');
-  g('summary').classList.remove('show');
-  g('hlBar').style.display='none';
+    ['pay5','pay7','pay9'].forEach(id=>g(id).textContent='RM —');
+    ['sLoanAmt','sTotalInt','sTotalRep'].forEach(id=>g(id).textContent='—');
+    g('summary').classList.remove('show');
+    g('hlBar').style.display='none';
 }
 
 function resetAll(){
@@ -727,7 +697,7 @@ function resetAll(){
   chk.checked=false;chk.disabled=true;
   g('grantSt').textContent='OFF';g('grantSt').className='grant-status gs-off';
   carPrice=0;insAmt=0;varLabel='';
-  clearOut();
+    clearOut();
 }
 </script>
 </body>
