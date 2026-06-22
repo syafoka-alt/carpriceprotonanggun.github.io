@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Adda Proton · Loan Calculator | carpriceprotonanggun.com</title>
+<meta name="description" content="Calculate your Proton car loan instantly. Get monthly installment estimates for all Proton models including e.MAS EV & PHEV. Visit carpriceprotonanggun.com"/>
+<meta name="keywords" content="Proton loan calculator, Proton car price, carpriceprotonanggun, Adda Proton, e.MAS, X50, X70, S70"/>
+<meta property="og:title" content="Adda Proton Vehicle Loan Calculator"/>
+<meta property="og:description" content="Instant Proton car loan estimates — carpriceprotonanggun.com"/>
+<meta property="og:url" content="https://carpriceprotonanggun.com"/>
+<link rel="canonical" href="https://carpriceprotonanggun.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#05091a;--panel:#080f22;--border:#1a2f5a;--border-hi:#2a5fc4;
+  --accent:#00c3ff;--accent2:#7b5cff;--gold:#ffd000;--gold2:#ffe966;
+  --green:#00e5a0;--red:#ff5577;--purple:#c084fc;--orange:#ff8c42;
+  --text:#ddeeff;--muted:#4a6a99;--input:#040b18;
+}
+body{background:var(--bg);color:var(--text);font-family:'Exo 2',sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 80% 40% at 20% 0%,rgba(0,100,255,0.07) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 100%,rgba(120,80,255,0.07) 0%,transparent 60%),
+    linear-gradient(rgba(0,195,255,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,195,255,0.025) 1px,transparent 1px);
+  background-size:auto,auto,44px 44px,44px 44px;pointer-events:none;
+}
+.page{position:relative;z-index:1;max-width:940px;margin:0 auto;padding:28px 16px 64px}
+
+/* HEADER */
+.hdr{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 26px;margin-bottom:24px;
+  background:linear-gradient(120deg,rgba(8,15,34,0.98),rgba(5,9,26,0.98));
+  border:1px solid var(--border-hi);border-radius:18px;
+  box-shadow:0 0 40px rgba(0,120,255,0.08),inset 0 1px 0 rgba(255,255,255,0.04);
+  position:relative;overflow:hidden;
+}
+.hdr::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent2),var(--accent),var(--gold),var(--accent));
+  background-size:200%;animation:shimmer 3s linear infinite;
+}
+@keyframes shimmer{0%{background-position:0%}100%{background-position:200%}}
+.hdr-left{display:flex;align-items:center;gap:16px}
+
+/* LOGO CIRCLE */
+.logo-wrap{
+  width:62px;height:62px;border-radius:50%;
+  background:radial-gradient(circle,#1a1a1a,#000);
+  border:2px solid rgba(180,180,180,0.35);
+  box-shadow:0 0 0 1px rgba(255,255,255,0.08),0 0 24px rgba(0,195,255,0.18),0 0 48px rgba(0,195,255,0.07);
+  overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  position:relative;
+}
+.logo-wrap::after{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  background:linear-gradient(135deg,rgba(255,255,255,0.06) 0%,transparent 60%);
+  pointer-events:none;
+}
+.logo-wrap img{width:100%;height:100%;object-fit:cover;display:block;border-radius:50%}
+
+.brand-name{
+  font-family:'Orbitron',sans-serif;font-size:22px;font-weight:800;
+  background:linear-gradient(90deg,#fff 0%,var(--accent) 60%,var(--accent2) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px;
+}
+.brand-sub{font-size:9px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:3px}
+.hdr-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.hdr-pill{
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:700;
+  padding:5px 14px;border-radius:20px;
+  background:linear-gradient(90deg,rgba(0,195,255,0.1),rgba(123,92,255,0.1));
+  border:1px solid rgba(0,195,255,0.25);color:var(--accent);
+}
+.hdr-url{font-size:9px;color:var(--muted);letter-spacing:1px}
+
+/* HERO */
+.hero{text-align:center;margin-bottom:26px}
+.hero-title{
+  font-family:'Orbitron',sans-serif;
+  font-size:clamp(18px,4.5vw,36px);font-weight:800;letter-spacing:4px;
+  background:linear-gradient(90deg,var(--accent) 0%,#fff 40%,var(--gold) 75%,var(--orange) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:8px;line-height:1.15;
+}
+.hero-sub{font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+
+/* PANEL */
+.panel{
+  background:linear-gradient(150deg,rgba(8,15,34,0.99),rgba(5,9,24,1));
+  border:1px solid var(--border);border-radius:20px;padding:28px;
+  margin-bottom:18px;position:relative;overflow:hidden;
+  box-shadow:0 4px 60px rgba(0,80,200,0.07);
+}
+.panel::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent 0%,var(--accent) 40%,var(--accent2) 60%,transparent 100%);
+}
+
+/* SECTION LABELS */
+.slabel{display:flex;align-items:center;gap:10px;font-size:9px;letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:16px}
+.slabel-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.slabel-line{flex:1;height:1px}
+.s-blue .slabel-dot{background:var(--accent);box-shadow:0 0 6px var(--accent)}
+.s-blue .slabel-text{color:var(--accent)}
+.s-blue .slabel-line{background:linear-gradient(90deg,var(--border-hi),transparent)}
+.s-purple .slabel-dot{background:var(--accent2);box-shadow:0 0 6px var(--accent2)}
+.s-purple .slabel-text{color:var(--accent2)}
+.s-purple .slabel-line{background:linear-gradient(90deg,rgba(123,92,255,0.4),transparent)}
+.s-gold .slabel-dot{background:var(--gold);box-shadow:0 0 6px var(--gold)}
+.s-gold .slabel-text{color:var(--gold)}
+.s-gold .slabel-line{background:linear-gradient(90deg,rgba(255,208,0,0.3),transparent)}
+.s-green .slabel-dot{background:var(--green);box-shadow:0 0 6px var(--green)}
+.s-green .slabel-text{color:var(--green)}
+.s-green .slabel-line{background:linear-gradient(90deg,rgba(0,229,160,0.3),transparent)}
+
+/* GRIDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.span2{grid-column:span 2}.mb{margin-bottom:16px}
+@media(max-width:1024px){
+  .page{max-width:100%;padding:18px 10px 34px;}
+  .hdr{padding:14px 16px;margin-bottom:16px;}
+  .hero{margin-bottom:18px;}
+  .panel{padding:22px;}
+  .g4{grid-template-columns:1fr 1fr;gap:12px;}
+  .g2{gap:12px;}
+  .slabel{margin-bottom:14px;}
+  .flabel{font-size:10px;}
+  input,select{padding:10px 12px;font-size:13px;}
+  .dbox{min-height:40px;}
+  .hcard{padding:12px 14px;}
+}
+@media(max-width:900px){
+  .page{padding:18px 10px 32px;}
+  .hdr{padding:14px 14px;}
+  .hero-title{font-size:clamp(18px,4.5vw,32px);}
+  .hero-sub{font-size:10px;}
+  .panel{padding:20px;}
+  .hdr{flex-direction:column;align-items:flex-start;gap:12px;}
+  .hdr-right{align-items:flex-start;}
+  .hl-bar{flex-direction:column;}
+}
+@media(max-width:820px){
+  .page{padding:16px 10px 28px;}
+  .hero-title{font-size:clamp(18px,5vw,28px);}
+  .hero-sub{font-size:10px;}
+  .panel{padding:18px;}
+  .hdr{gap:12px;}
+  .hl-bar{gap:10px;}
+}
+@media(max-width:700px){.g4{grid-template-columns:1fr 1fr}}
+@media(max-width:440px){.g4,.g2{grid-template-columns:1fr}.span2{grid-column:span 1}}
+
+/* FIELDS */
+.field{display:flex;flex-direction:column;gap:6px}
+.flabel{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:600}
+input,select{
+  background:var(--input);border:1px solid var(--border);border-radius:10px;
+  color:var(--text);font-family:'Exo 2',sans-serif;font-size:13px;font-weight:500;
+  padding:9px 12px;outline:none;width:100%;appearance:none;
+  transition:border-color .2s,box-shadow .2s,background .2s;
+}
+input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,195,255,0.1);background:#040e1e}
+input[readonly]{color:var(--gold2);font-weight:700;cursor:default;border-color:rgba(255,208,0,0.2)}
+.swrap{position:relative}
+.swrap::after{content:'▾';position:absolute;right:13px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+
+.rate-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rate-btn{width:100%;border:1px solid var(--border);border-radius:12px;background:var(--input);color:var(--text);font-family:'Exo 2',sans-serif;font-size:14px;font-weight:700;padding:12px 0;cursor:pointer;transition:all .2s}
+.rate-btn:hover{border-color:var(--accent);box-shadow:0 0 12px rgba(0,195,255,0.12)}
+.rate-btn.sel{background:linear-gradient(90deg,var(--accent),var(--accent2));border-color:var(--accent);color:#fff;box-shadow:0 8px 24px rgba(0,195,255,0.18)}
+
+/* DBOX */
+.dbox{background:var(--input);border:1px solid var(--border);border-radius:10px;padding:11px 14px;font-size:14px;font-weight:700;min-height:44px;display:flex;align-items:center}
+.dbox.c-green{color:var(--green);border-color:rgba(0,229,160,0.2)}
+.dbox.c-blue{color:var(--accent);border-color:rgba(0,195,255,0.2)}
+.dbox.c-purple{color:var(--purple);border-color:rgba(192,132,252,0.2)}
+.dbox.c-gold{color:var(--gold2);border-color:rgba(255,208,0,0.2)}
+
+/* BADGE */
+.type-badge{display:inline-flex;align-items:center;gap:6px;font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:4px 10px;border-radius:6px;margin-bottom:12px}
+.tb-ice{background:rgba(0,195,255,0.1);color:var(--accent);border:1px solid rgba(0,195,255,0.25)}
+.tb-ev{background:rgba(0,229,160,0.1);color:var(--green);border:1px solid rgba(0,229,160,0.25)}
+.tb-phev{background:rgba(255,208,0,0.1);color:var(--gold);border:1px solid rgba(255,208,0,0.25)}
+
+/* GRANT TOGGLE */
+.grant-row{background:var(--input);border:1px solid var(--border);border-radius:10px;padding:11px 14px;display:flex;align-items:center;justify-content:space-between;min-height:44px;gap:10px}
+.tgl{position:relative;width:46px;height:24px;cursor:pointer;flex-shrink:0}
+.tgl input{opacity:0;width:0;height:0;position:absolute}
+.tgl-track{position:absolute;inset:0;border-radius:12px;background:#0a1830;border:1px solid var(--border);transition:all .3s}
+.tgl input:checked~.tgl-track{background:linear-gradient(90deg,var(--accent2),var(--accent));border-color:var(--accent);box-shadow:0 0 12px rgba(0,195,255,0.3)}
+.tgl-thumb{position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .3s;box-shadow:0 1px 4px rgba(0,0,0,.5)}
+.tgl input:checked~.tgl-track~.tgl-thumb{transform:translateX(22px)}
+.grant-status{font-size:11px;font-weight:700;letter-spacing:1px;transition:color .3s}
+.gs-on{color:var(--green)}.gs-off{color:var(--muted)}
+
+/* DIVIDER */
+.hdiv{height:1px;margin:20px 0;background:linear-gradient(90deg,transparent,var(--border-hi),rgba(123,92,255,0.4),transparent)}
+
+/* TENURE CARDS */
+.tenure-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:4px}
+.tcard{border-radius:16px;padding:20px 12px;text-align:center;cursor:pointer;background:linear-gradient(160deg,#0a1530,#060f22);border:1px solid var(--border);transition:all .25s;position:relative;overflow:hidden}
+.tcard::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border-hi),transparent)}
+.tcard:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,120,255,0.15)}
+.tcard.sel{background:linear-gradient(160deg,#1a0f30,#0e0820);border-color:var(--accent2)}
+.tcard.sel::before{background:linear-gradient(90deg,transparent,var(--accent2),var(--accent),transparent)}
+@keyframes cardPulse{0%,100%{box-shadow:0 0 20px rgba(123,92,255,0.2)}50%{box-shadow:0 0 35px rgba(123,92,255,0.4)}}
+.tcard.sel{animation:cardPulse 2.5s ease-in-out infinite}
+.tc-yr{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.tcard.sel .tc-yr{color:var(--accent2)}
+.tc-amt{font-family:'Orbitron',sans-serif;font-size:clamp(11px,2vw,17px);font-weight:700;color:var(--text);line-height:1.2}
+.tcard.sel .tc-amt{background:linear-gradient(90deg,var(--accent2),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.tc-sub{font-size:9px;color:var(--muted);margin-top:6px}
+.tcard.sel .tc-sub{color:var(--accent2);opacity:.7}
+.tc-badge{display:none;font-size:8px;letter-spacing:1px;text-transform:uppercase;font-weight:700;background:linear-gradient(90deg,var(--accent2),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-top:6px}
+.tcard.sel .tc-badge{display:block}
+
+/* HIGHLIGHT BAR */
+.hl-bar{display:flex;gap:12px;margin-top:18px}
+.hcard{flex:1;border-radius:12px;padding:14px 16px;background:var(--input);border:1px solid var(--border);text-align:center}
+.hcard-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.hcard-val{font-family:'Orbitron',sans-serif;font-size:clamp(11px,2.2vw,19px);font-weight:800}
+.hc-blue{border-color:rgba(0,195,255,0.25);background:linear-gradient(135deg,rgba(0,195,255,0.05),var(--input))}
+.hc-blue .hcard-val{color:var(--accent)}
+.hc-gold{border-color:rgba(255,208,0,0.25);background:linear-gradient(135deg,rgba(255,208,0,0.05),var(--input))}
+.hc-gold .hcard-val{color:var(--gold2)}
+.hc-green{border-color:rgba(0,229,160,0.25);background:linear-gradient(135deg,rgba(0,229,160,0.05),var(--input))}
+.hc-green .hcard-val{color:var(--green)}
+@media(max-width:440px){.hl-bar{flex-direction:column}}
+
+/* SUMMARY */
+.summary{margin-top:18px;border-radius:16px;padding:20px;background:linear-gradient(135deg,rgba(0,195,255,0.03),rgba(123,92,255,0.03));border:1px solid var(--border);display:none}
+.summary.show{display:block}
+.sum-hdr{display:flex;align-items:center;gap:10px;font-size:9px;letter-spacing:3px;text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:16px}
+.sum-hdr::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-hi),transparent)}
+.sum-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 24px}
+@media(max-width:460px){.sum-grid{grid-template-columns:1fr}}
+.srow{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px}
+.srow:last-child{border-bottom:none}
+.sk{color:var(--muted)}.sv{font-weight:700}
+.sv.blue{color:var(--accent)}.sv.gold{color:var(--gold2)}.sv.green{color:var(--green)}
+.sv.purple{color:var(--purple)}.sv.orange{color:var(--orange)}.sv.red{color:var(--red)}
+
+/* RESET */
+.btn-reset{width:100%;margin-top:20px;padding:14px;background:transparent;border:1px solid var(--border-hi);color:var(--muted);font-family:'Exo 2',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;border-radius:12px;cursor:pointer;transition:all .2s}
+.btn-reset:hover{border-color:var(--accent);color:var(--accent);background:rgba(0,195,255,0.05);box-shadow:0 0 20px rgba(0,195,255,0.1)}
+
+/* FOOTER */
+.footer{text-align:center;padding-top:20px;font-size:10px;color:var(--muted);letter-spacing:1px;line-height:2}
+.footer a{color:var(--accent);text-decoration:none}
+.footer-top{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px}
+.foot-logo{width:32px;height:32px;border-radius:50%;background:radial-gradient(circle,#1a1a1a,#000);border:1px solid rgba(180,180,180,0.3);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.foot-logo img{width:86%;height:86%;object-fit:contain}
+.foot-brand{font-family:'Orbitron',sans-serif;font-size:14px;font-weight:800;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.foot-domain{font-size:10px;color:var(--accent);letter-spacing:1px}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.page{animation:fadeUp .5s ease}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-left">
+    <div class="logo-wrap">
+      <img id="mainLogo" alt="Proton Logo"/>
+    </div>
+    <div>
+      <div class="brand-name">ADDA PROTON</div>
+      <div class="brand-sub">Authorized Dealer · Loan Calculator</div>
+    </div>
+  </div>
+  <div class="hdr-right">
+    <div class="hdr-url" style="font-size:10px;color:var(--muted);letter-spacing:1px">🌐 carpriceprotonanggun.com</div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-title">VEHICLE LOAN CALCULATOR</div>
+  <div class="hero-sub">Select Model &nbsp;·&nbsp; Configure Loan &nbsp;·&nbsp; Get Instant Results</div>
+</div>
+
+<!-- MAIN PANEL -->
+<div class="panel">
+
+  <div class="slabel s-blue"><div class="slabel-dot"></div><span class="slabel-text">01 &nbsp; Vehicle Selection</span><div class="slabel-line"></div></div>
+  <div class="g2 mb">
+    <div class="field span2">
+      <div class="flabel">Car Model</div>
+      <div class="swrap">
+        <select id="selModel" onchange="onModel()">
+          <option value="">— Select Model —</option>
+          <optgroup label="── ICE Models ──">
+            <option value="1">PROTON NEW X50</option>
+            <option value="2">PROTON NEW X70</option>
+            <option value="3">PROTON NEW X90</option>
+            <option value="4">PROTON NEW S70</option>
+            <option value="8">ALL NEW SAGA</option>
+            <option value="9">PERSONA</option>
+          </optgroup>
+          <optgroup label="── EV / PHEV Models ──">
+            <option value="5">PROTON e.MAS 5 ⚡ EV</option>
+            <option value="6">PROTON e.MAS 7 ⚡ EV</option>
+            <option value="7">PROTON e.MAS 7 PHE V 🔋 PHEV</option>
+          </optgroup>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div id="varRow" style="display:none" class="mb">
+    <div id="typeBadge"></div>
+    <div class="field">
+      <div class="flabel">Variant</div>
+      <div class="swrap">
+        <select id="selVariant" onchange="onVariant()">
+          <option value="">— Select Variant —</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="slabel s-purple"><div class="slabel-dot"></div><span class="slabel-text">02 &nbsp; Pricing Details</span><div class="slabel-line"></div></div>
+  <div class="g4 mb">
+    <div class="field">
+      <div class="flabel">OTR Price (RM)</div>
+      <input type="text" id="otrPrice" readonly placeholder="—"/>
+    </div>
+    <div class="field">
+      <div class="flabel">Rebate (RM)</div>
+      <input type="number" id="inRebate" value="4000" min="0" oninput="recalc()"/>
+    </div>
+    <div class="field">
+      <div class="flabel">Est. Insurance (RM)</div>
+      <div class="dbox c-purple" id="insDisplay">—</div>
+    </div>
+    <div class="field">
+      <div class="flabel">EV Grant Matching</div>
+      <div class="grant-row">
+        <label class="tgl">
+          <input type="checkbox" id="chkGrant" onchange="onGrant()" disabled/>
+          <div class="tgl-track"></div>
+          <div class="tgl-thumb"></div>
+        </label>
+        <span class="grant-status gs-off" id="grantSt">OFF</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="slabel s-gold"><div class="slabel-dot"></div><span class="slabel-text">03 &nbsp; Loan Configuration</span><div class="slabel-line"></div></div>
+  <div class="g4 mb">
+    <div class="field">
+      <div class="flabel">Interest Rate (r)</div>
+      <div class="rate-row">
+        <button type="button" class="rate-btn sel" id="rate23" onclick="setRate(2.3)">2.3%</button>
+        <button type="button" class="rate-btn" id="rate30" onclick="setRate(3)">3%</button>
+      </div>
+    </div>
+    <div class="field">
+      <div class="flabel">Loan Tenure (Years)</div>
+      <input type="number" id="inYears" value="5" min="1" max="9" oninput="recalc()"/>
+    </div>
+    <div class="field">
+      <div class="flabel">Loan Tenure (Months)</div>
+      <input type="text" id="inMonths" readonly value="60"/>
+    </div>
+    <div class="field">
+      <div class="flabel">NCD Old Car (%)</div>
+      <div class="swrap">
+        <select id="selNCD" onchange="recalc()">
+          <option value="0">0% — No NCD</option>
+          <option value="25">25%</option>
+          <option value="30">30%</option>
+          <option value="38.5">38.5%</option>
+          <option value="45">45%</option>
+          <option value="55">55% — Max</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <div class="flabel">NCD Discount (RM)</div>
+      <div class="dbox c-green" id="ncdDisplay">—</div>
+    </div>
+  </div>
+
+  <div class="g2 mb">
+    <div class="field">
+      <div class="flabel">Down Payment (%)</div>
+      <input type="number" id="inDownPct" value="0" min="0" max="100" oninput="onDownPct()"/>
+    </div>
+    <div class="field">
+      <div class="flabel">Down Payment (RM)</div>
+      <input type="number" id="inDownAmt" value="0.00" min="0" step="0.01" oninput="onDownAmt()"/>
+    </div>
+  </div>
+  <div class="field span2" style="margin:10px 0 16px;">
+    <div class="flabel" style="color:var(--muted);font-size:11px;line-height:1.5;">Use only one down payment method: % or RM. The other field will clear automatically.</div>
+  </div>
+
+  <div class="g2 mb">
+    <div class="field">
+      <div class="flabel">Total Loan Amount (RM)</div>
+      <div class="dbox c-blue" id="loanAmt">—</div>
+    </div>
+    <div class="field">
+      <div class="flabel">Total Interest (RM)</div>
+      <div class="dbox c-gold" id="intDisplay">—</div>
+    </div>
+  </div>
+
+  <!-- HIGHLIGHT BAR -->
+  <div class="hl-bar" id="hlBar" style="display:none">
+    <div class="hcard hc-blue"><div class="hcard-label">Loan Amount</div><div class="hcard-val" id="hlLoan">—</div></div>
+    <div class="hcard hc-gold"><div class="hcard-label">Total Interest</div><div class="hcard-val" id="hlInt">—</div></div>
+    <div class="hcard hc-green"><div class="hcard-label">Total Repayment</div><div class="hcard-val" id="hlTotal">—</div></div>
+  </div>
+
+  <div class="hdiv"></div>
+
+  <div class="slabel s-green"><div class="slabel-dot"></div><span class="slabel-text">04 &nbsp; Monthly Installment</span><div class="slabel-line"></div></div>
+  <div class="g2 mb">
+    <div class="field">
+      <div class="flabel">Monthly Installment (RM)</div>
+      <div class="dbox c-green" id="monthlyPay">—</div>
+    </div>
+    <div class="field">
+      <div class="flabel">Loan Months</div>
+      <div class="dbox c-blue" id="loanMonths">—</div>
+    </div>
+  </div>
+
+  <div class="tenure-grid mb">
+    <div class="tcard">
+      <div class="tc-yr">5 Years / 60 Months</div>
+      <div class="tc-amt" id="pay5">RM —</div>
+      <div class="tc-sub">Monthly</div>
+    </div>
+    <div class="tcard">
+      <div class="tc-yr">7 Years / 84 Months</div>
+      <div class="tc-amt" id="pay7">RM —</div>
+      <div class="tc-sub">Monthly</div>
+    </div>
+    <div class="tcard">
+      <div class="tc-yr">9 Years / 108 Months</div>
+      <div class="tc-amt" id="pay9">RM —</div>
+      <div class="tc-sub">Monthly</div>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary" id="summary">
+    <div class="sum-hdr">📋 &nbsp; Full Loan Summary</div>
+    <div class="sum-grid">
+      <div>
+        <div class="srow"><span class="sk">Car Model</span><span class="sv blue" id="sModel">—</span></div>
+        <div class="srow"><span class="sk">OTR Price</span><span class="sv" id="sPrice">—</span></div>
+        <div class="srow"><span class="sk">Down Payment</span><span class="sv orange" id="sDown">—</span></div>
+        <div class="srow"><span class="sk">Loan Amount</span><span class="sv blue" id="sLoan">—</span></div>
+        <div class="srow"><span class="sk">Loan Tenure</span><span class="sv" id="sTenure">—</span></div>
+        <div class="srow"><span class="sk">Interest Rate</span><span class="sv" id="sRate">2.3% flat</span></div>
+      </div>
+      <div>
+        <div class="srow"><span class="sk">Est. Insurance</span><span class="sv purple" id="sIns">—</span></div>
+        <div class="srow"><span class="sk">NCD Discount</span><span class="sv green" id="sNCD">—</span></div>
+        <div class="srow"><span class="sk">Rebate</span><span class="sv gold" id="sRebate">—</span></div>
+        <div class="srow"><span class="sk">EV Grant</span><span class="sv gold" id="sGrant">—</span></div>
+        <div class="srow"><span class="sk">Total Interest</span><span class="sv red" id="sInt">—</span></div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-reset" onclick="resetAll()">↺ &nbsp;&nbsp; Reset Calculator</button>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-top">
+    <div class="foot-logo"><img id="footLogo" alt="Proton"/></div>
+    <span class="foot-brand">ADDA PROTON</span>
+    <span class="foot-domain">carpriceprotonanggun.com</span>
+  </div>
+  © 2025 &nbsp;<a href="https://carpriceprotonanggun.com">carpriceprotonanggun.com</a> &nbsp;·&nbsp; Adda Proton Authorized Dealer<br>
+  Anggaran sahaja. Harga tertakluk kepada perubahan tanpa notis. Hubungi Adda Proton untuk harga dan tawaran rasmi.
+</div>
+
+</div>
+
+<script>
+/* ─── EMBED PROTON LOGO from uploaded image ─── */
+// The uploaded image is converted to a data URL and injected into both logo slots
+(function(){
+  // Load the actual Proton logo from Wikipedia (official SVG)
+  const LOGO_URLS = [
+    'https://upload.wikimedia.org/wikipedia/en/thumb/9/9b/Proton_Holdings_logo.svg/200px-Proton_Holdings_logo.svg.png',
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Proton_logo_%282019%29.svg/200px-Proton_logo_%282019%29.svg.png',
+    'https://www.proton.com.my/images/proton-logo.png'
+  ];
+
+  function tryLoadLogo(imgs, urls, idx){
+    if(idx >= urls.length){
+      // fallback: draw a simple P badge
+      imgs.forEach(img => {
+        img.style.display='none';
+        const span=document.createElement('span');
+        span.textContent='P';
+        span.style.cssText='font-family:Orbitron,sans-serif;font-size:22px;font-weight:800;color:#c8c8c8;text-shadow:0 0 10px rgba(255,255,255,0.3)';
+        img.parentElement.appendChild(span);
+      });
+      return;
+    }
+    const testImg = new Image();
+    testImg.crossOrigin='anonymous';
+    testImg.onload = () => { imgs.forEach(img => img.src = urls[idx]); };
+    testImg.onerror = () => tryLoadLogo(imgs, urls, idx+1);
+    testImg.src = urls[idx];
+  }
+
+  const ml=document.getElementById('mainLogo');
+  const fl=document.getElementById('footLogo');
+  [ml,fl].forEach(img=>{
+    img.style.cssText='width:100%;height:100%;object-fit:cover;border-radius:50%';
+  });
+  tryLoadLogo([ml,fl], LOGO_URLS, 0);
+})();
+
+/* ─── DATA ─── */
+const DEFAULT_RATE=2.3, GRANT=2500;
+let selectedRate=DEFAULT_RATE;
+const MODELS={
+  1:{name:'PROTON NEW X50',type:'ICE',v:[
+    {n:'EXECUTIVE',p:92214.70,i:2414.70},
+    {n:'PREMIUM',p:104501.10,i:2701.10},
+    {n:'FLAGSHIP',p:116263.65,i:2963.65}]},
+  2:{name:'PROTON NEW X70',type:'ICE',v:[
+    {n:'EXECUTIVE',p:109620.45,i:2820.45},
+    {n:'PREMIUM',p:122930.74,i:3130.74}]},
+  3:{name:'PROTON NEW X90',type:'ICE',v:[
+    {n:'X90 LITE',p:109620.45,i:2820.45},
+    {n:'PRIME',p:119859.13,i:3059.13},
+    {n:'PRIME X',p:126002.34,i:3202.34}]},
+  4:{name:'PROTON NEW S70',type:'ICE',v:[
+    {n:'EXECUTIVE',p:76189.78,i:2389.78},
+    {n:'PREMIUM',p:82358.26,i:2558.26},
+    {n:'FLAGSHIP',p:92639.06,i:2839.06},
+    {n:'FLAGSHIP X',p:97779.46,i:2979.46}]},
+  5:{name:'PROTON e.MAS 5',type:'EV',v:[
+    {n:'PRIME',p:62657.67,i:2857.67},
+    {n:'PREMIUM',p:76136.79,i:3336.79}]},
+  6:{name:'PROTON e.MAS 7',type:'EV',v:[
+    {n:'CKD',p:107535.00,i:3735.00},
+    {n:'PREMIUM CKD',p:123939.40,i:4139.40}]},
+  7:{name:'PROTON e.MAS 7 PHE V',type:'PHEV',v:[
+    {n:'PRIME',p:114970.75,i:5170.75},
+    {n:'PREMIUM',p:129403.15,i:5603.15},
+    {n:'PREMIUM PLUS',p:135588.50,i:5788.50}]},
+  8:{name:'ALL NEW SAGA',type:'ICE',v:[
+    {n:'STANDARD',p:40396.98,i:1406.98},
+    {n:'EXECUTIVE',p:46565.46,i:1575.46},
+    {n:'PREMIUM',p:51705.86,i:1715.86}]},
+  9:{name:'PERSONA',type:'ICE',v:[
+    {n:'STANDARD',p:49431.62,i:1631.62},
+    {n:'EXECUTIVE',p:55100.00,i:1800.10},
+    {n:'PREMIUM',p:60240.50,i:1940.50}]}
+};
+
+let carPrice=0,insAmt=0,varLabel='',selYear=5;
+const g=id=>document.getElementById(id);
+const fmt=n=>'RM '+n.toLocaleString('en-MY',{minimumFractionDigits:2,maximumFractionDigits:2});
+
+function onModel(){
+  const mid=+g('selModel').value;
+  g('selVariant').innerHTML='<option value="">— Select Variant —</option>';
+  carPrice=0;insAmt=0;varLabel='';clearOut();
+  if(!mid){g('varRow').style.display='none';g('typeBadge').innerHTML='';return;}
+  const m=MODELS[mid];
+  const bmap={ICE:['tb-ice','🚗 ICE'],EV:['tb-ev','⚡ EV'],PHEV:['tb-phev','🔋 PHEV']};
+  const[cls,lbl]=bmap[m.type];
+  g('typeBadge').innerHTML=`<span class="type-badge ${cls}">${lbl} · ${m.name}</span>`;
+  m.v.forEach((v,i)=>{
+    const o=document.createElement('option');
+    o.value=i;o.textContent=v.n+'  —  '+fmt(v.p);
+    g('selVariant').appendChild(o);
+  });
+  g('varRow').style.display='block';
+  g('chkGrant').disabled=false;
+}
+
+function onVariant(){
+  const mid=+g('selModel').value,vi=g('selVariant').value;
+  if(vi===''){carPrice=0;insAmt=0;varLabel='';clearOut();return;}
+  const v=MODELS[mid].v[vi];
+  carPrice=v.p;insAmt=v.i;varLabel=MODELS[mid].name+' '+v.n;
+  g('otrPrice').value=carPrice.toLocaleString('en-MY',{minimumFractionDigits:2});
+  g('insDisplay').textContent=fmt(insAmt);
+  recalc();
+}
+
+function onGrant(){
+  const on=g('chkGrant').checked;
+  g('grantSt').textContent=on?'ON':'OFF';
+  g('grantSt').className='grant-status '+(on?'gs-on':'gs-off');
+  recalc();
+}
+
+function setRate(rate){
+  selectedRate=rate;
+  g('rate23').classList.toggle('sel', rate===2.3);
+  g('rate30').classList.toggle('sel', rate===3);
+  recalc();
+}
+
+function onDownPct(){
+  const pct=Math.max(0, Math.min(100, parseFloat(g('inDownPct').value) || 0));
+  g('inDownPct').value=pct;
+  g('inDownAmt').value='';
+  recalc();
+}
+
+function onDownAmt(){
+  const amt=Math.max(0, parseFloat(g('inDownAmt').value) || 0);
+  g('inDownAmt').value=amt.toFixed(2);
+  g('inDownPct').value='';
+  recalc();
+}
+
+function recalc(){
+  if(!carPrice){clearOut();return;}
+  const rebate=parseFloat(g('inRebate').value)||0;
+  const ncdPct=parseFloat(g('selNCD').value)||0;
+  const downPct=parseFloat(g('inDownPct').value)||0;
+  const downAmtInput=parseFloat(g('inDownAmt').value)||0;
+  const years=parseFloat(g('inYears').value)||0;
+  const months=Math.max(0, Math.round(years*12));
+  g('inMonths').value=months>0?months:'';
+  const ncdAmt=insAmt*(ncdPct/100);
+  const down = downPct>0 ? (carPrice * downPct / 100) : downAmtInput;
+  const grantOn=g('chkGrant').checked;
+  const gAmt=grantOn?GRANT:0;
+  const loan=Math.max(0, carPrice - rebate - down - ncdAmt - gAmt);
+  const totalInt=loan * (selectedRate/100) * Math.max(0, years);
+  g('ncdDisplay').textContent=fmt(ncdAmt);
+  g('loanAmt').textContent=fmt(loan);
+  g('intDisplay').textContent=fmt(totalInt);
+  g('monthlyPay').textContent=months>0?fmt((loan+totalInt)/months):'RM —';
+  g('loanMonths').textContent=months>0?months:'—';
+  const pay5 = loan>0 ? fmt((loan + loan*(selectedRate/100)*5) / 60) : 'RM —';
+  const pay7 = loan>0 ? fmt((loan + loan*(selectedRate/100)*7) / 84) : 'RM —';
+  const pay9 = loan>0 ? fmt((loan + loan*(selectedRate/100)*9) / 108) : 'RM —';
+  g('pay5').textContent = pay5;
+  g('pay7').textContent = pay7;
+  g('pay9').textContent = pay9;
+  g('hlLoan').textContent=fmt(loan);
+  g('hlInt').textContent=fmt(totalInt);
+  g('hlTotal').textContent=fmt(loan+totalInt);
+  g('hlBar').style.display='flex';
+  g('sModel').textContent=varLabel;
+  g('sPrice').textContent=fmt(carPrice);
+  g('sDown').textContent=fmt(down);
+  g('sLoan').textContent=fmt(loan);
+  g('sTenure').textContent=years>0?years+' yr':'—';
+  g('sRate').textContent=selectedRate.toFixed(1)+'% flat';
+  g('sIns').textContent=fmt(insAmt);
+  g('sNCD').textContent='− '+fmt(ncdAmt);
+  g('sRebate').textContent=fmt(rebate);
+  g('sGrant').textContent=gAmt?fmt(gAmt):'N/A';
+  g('sInt').textContent=fmt(totalInt);
+  g('summary').classList.add('show');
+}
+
+function setTenure(yr){
+  selYear=yr;
+  [5,7,9].forEach(y=>g('c'+y).classList.toggle('sel',y===yr));
+}
+
+function clearOut(){
+  g('otrPrice').value='';
+  ['insDisplay','ncdDisplay','loanAmt','intDisplay','monthlyPay'].forEach(id=>g(id).textContent='—');
+  g('loanMonths').textContent='—';
+  g('inMonths').value='';
+  ['pay5','pay7','pay9'].forEach(id=>g(id).textContent='RM —');
+  g('summary').classList.remove('show');
+  g('hlBar').style.display='none';
+}
+
+function resetAll(){
+  g('selModel').value='';
+  g('selVariant').innerHTML='<option value="">— Select Variant —</option>';
+  g('varRow').style.display='none';
+  g('typeBadge').innerHTML='';
+  g('inRebate').value=4000;
+  g('inDownPct').value=0;
+  g('inDownAmt').value=0;
+  g('inYears').value=5;
+  g('inMonths').value=60;
+  g('selNCD').value=0;
+  selectedRate=DEFAULT_RATE;
+  g('rate23').classList.add('sel');
+  g('rate30').classList.remove('sel');
+  const chk=g('chkGrant');
+  chk.checked=false;chk.disabled=true;
+  g('grantSt').textContent='OFF';g('grantSt').className='grant-status gs-off';
+  carPrice=0;insAmt=0;varLabel='';
+  clearOut();
+}
+</script>
+</body>
+</html>
